@@ -1,0 +1,14 @@
+{
+  "name": "ToDoList",
+  "version": "1.0.0",
+  "description": "Python Modern GUI using Flask",
+  "main": "index.js",
+  "author": "Vetrivel Ravi",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
+  },
+  "scripts": {
+    "watch": "yarn tailwindcss -i ./static/src/css/input.css -o ./static/dist/css/styles.css --watch"
+  }
+}

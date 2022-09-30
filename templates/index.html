@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="{{url_for('static', filename='dist/css/styles.css')}}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+</head>
+
+<body>
+    <header class="w-full flex items-center shadow-md px-8 md:px-32 py-2 md:py-8">
+        <p class="text-white text-3xl font-semibold">ToDo: List</p>
+    </header>
+    <main class="w-full flex flex-col px-8 md:px-32 py-2 md:py-8">
+        {% block body %}{% endblock %}
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            function keep_alive_server() {
+                fetch(document.location + "flaskwebgui-dumb-request-for-middleware-keeping-the-server-online", {
+                    method: 'GET',
+                    cache: 'no-cache'
+                })
+                    .then(res => { })
+                    .catch(err => { })
+            }
+
+            try {
+                setInterval(keep_alive_server, 3 * 1000)()
+            } catch (error) {
+                // doesn't matter handled by middleware
+            }
+
+        })
+
+        $(document).on('submit', '#add_task', (e) => {
+            $.ajax({
+                type: 'POST',
+                url: 'addToList',
+                data: { todo: $("#todo_input").val() },
+                success: () => {
+                    todo: $("#todo_input").val("")
+                }
+
+            })
+        })
+    </script>
+
+</body>
+
+</html>
